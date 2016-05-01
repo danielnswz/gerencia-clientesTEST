@@ -10,9 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/', 'HomeController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::group(['prefix' => 'api'], function () {
+    	Route::resource('cliente', 'ClienteController',
+            array('only' => ['index', 'show', 'store', 'update', 'destroy']));
+    });
 
-Route::resource('cliente', 'ClienteController');
+

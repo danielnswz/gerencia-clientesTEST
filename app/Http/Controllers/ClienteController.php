@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Yajra\Datatables\Datatables;
+
+use App\Cliente;
+
 class ClienteController extends Controller
 {
     /**
@@ -15,18 +19,10 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
-        return "hola laravel";
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        //Returns a Cliente's list
+        $result= Cliente::all();
+        return Datatables::of($result)
+                ->make();
     }
 
     /**
@@ -37,7 +33,21 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $cliente = new Cliente;
+
+            $cliente->nombre = $request->nombre;
+            $cliente->apellido = $request->apellido;
+            if(isset($request->correo))
+                $cliente->correo = $request->correo;
+            $cliente->edad = $request->nacimiento;
+
+            $cliente->save();
+
+        }catch (\Exception $ex) {
+            $response = array('error' => $ex->getMessage());
+            return \Response::json($response, 500);
+        }
     }
 
     /**
@@ -49,17 +59,7 @@ class ClienteController extends Controller
     public function show($id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Cliente::find($id);
     }
 
     /**
@@ -72,6 +72,16 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $cliente = Cliente::find($id);
+
+        $cliente->nombre = $request->nombre;
+        $cliente->apellido = $request->apellido;
+        if(isset($request->correo))
+            $cliente->correo = $request->correo;
+        $cliente->edad = $request->nacimiento;
+
+        $cliente->save();
+
     }
 
     /**
@@ -83,5 +93,16 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+        try{
+            $cliente = Cliente::find($id);
+
+            $cliente->delete();
+
+            return \Response::json(array('success' => 'true'));
+        }catch(\Exception $ex) {
+            $response = array('error' => $ex->getMessage());
+            return \Response::json($response, 500);
+        }
+        
     }
 }

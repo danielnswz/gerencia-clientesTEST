@@ -1,0 +1,58 @@
+<div class="row" ng-show="errores != null ">
+    <div class="col-lg-12">
+        <div class="alert alert-danger alert-dismissable" ng-repeat="(k,v) in errores">
+            <i class="fa fa-ban"></i>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+            <b>{{ k }}</b>
+            <p ng-repeat="valor in v">{{ valor }}</p>
+        </div>
+    </div>
+</div>
+<div class="row" ng-if="isLoaded||isCreated">
+    <div class="col-lg-12">
+        <div class="box box-danger">
+            <!-- form start -->
+            <form role="form" name="form">
+                <div class="box-body">
+
+                    <div class="form-group" show-errors>
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" ng-model="departamento.nombre"
+                               placeholder="Nombre" required pattern="[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_\s\[\]\{\}\+\-\.\:\,\;\(\)\/\\\&\*\!\¿\?\¡\=\<\>\'\~\^]{0,45}"/>
+                        <p class="help-block" ng-if="form.nombre.$error.required">Este campo es obligatorio</p>
+                    </div>
+
+                    <div class="form-group" show-errors>
+                        <label for="ubicacion_sucursal">Ubicación dentro de la sucursal</label>
+                        <input type="text" class="form-control" id="ubicacion_sucursal" name="ubicacion_sucursal"
+                               ng-model="departamento.ubicacion_sucursal" required placeholder="Ubicación dentro de la sucursal"/>
+                    </div>
+
+                    <div class="form-group" show-errors>
+                        <label for="codigo">Código</label>
+                        <input type="text" class="form-control" id="codigo" name="codigo" ng-model="departamento.codigo"
+                               placeholder="Código" required pattern="[\w-]{0,45}"/>
+                    </div>
+
+                    <div class="form-group" show-errors>
+                        <label for="encargado">Encargado</label>
+                        <input type="text" class="form-control" id="encargado" name="encargado" ng-model="departamento.encargado"
+                               placeholder="Encargado" required pattern=".{0,45}"/>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" ng-click="submit(form)" ng-if="isCreated" class="btn btn-primary">Registrar departamento</button>
+                    <button type="submit" ng-click="submit(form)" ng-if="!isCreated" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div ng-if="!isLoaded&&isEdited">
+
+    <p>Cargando información del departamento</p>
+
+</div>

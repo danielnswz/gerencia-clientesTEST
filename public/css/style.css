@@ -1,0 +1,226 @@
+#side-menu li {
+    border-bottom: 1px solid #e7e7e7;
+}
+
+#side-menu .nav-second-level li, #side-menu .nav-third-level li {
+    border-bottom: 0!important;
+}
+
+#side-menu .nav-second-level li a {
+    padding-left: 37px;
+}
+
+.breadcrumb > li {
+
+    font-size: 1.5em !important;
+}
+
+.user{
+    cursor:pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.monthpicker  tr  td {
+  cursor: pointer;
+}
+
+.monthpicker  tr  td:hover {
+  background: #f5f5f5;
+}
+
+.monthpicker  tr  td.disable {
+  cursor: default;
+  color: #9f9f9f;
+  background: #f3f3f3;
+}
+
+.monthpicker  tr  td.disable:hover {
+  background: #f3f3f3;
+}
+
+section.content-header{
+    background: white !important;
+    padding: 15px 15px 15px 15px;
+}
+
+ol.breadcrumb{
+    top: 10px !important;
+}
+
+.bg-rojo-oscuro-triguena{
+    background: #a81b14 !important;
+
+}
+
+/*CSS PARA OCULTAR O MOSRTAR LOS MENSAJES DE ERROR DE VALIDACION DEL FORMULARIO*/
+.form-group .help-block {
+    display: none;
+}
+
+.form-group.has-error .help-block {
+    display: block;
+}
+
+
+.splash {
+    display: none;
+}
+
+[ng-cloak].splash {
+    display: block !important;
+}
+
+.splash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width:100%;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    background: #000;
+    z-index:100000000;
+}
+
+.splash h2 {
+
+    margin-top:10%;
+    text-align: center;
+    font-size: 4em;
+    color:white;
+}
+
+.invoice{
+    border:0px !important;
+}
+
+.list_car li{
+    list-style-type: none;
+}
+.list_car{
+    padding: 0px;
+}
+
+.card-description {
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+.first_letter {
+    text-transform: capitalize;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.dropdown-car .pull-right {
+    padding: 10px;
+}
+.dropdown-car .pull-right:hover {
+    color: red;
+    cursor: pointer;
+}
+.dropdown-car .pull-right {
+    color: #4f4f4f;
+    cursor: pointer;
+}
+
+.background-back{
+    background: #000000 !important;;
+    color: white !important;;
+}
+
+.title-pdf{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.less-border, .less-border tr td{
+    border: none !important;
+}
+
+.table-border{
+    border: 1px solid #000000;
+    padding:3px;
+}
+
+.table-pdf{
+    font-size: 10px;
+    text-align: right;
+}
+
+.full-width{
+    width: 100%;
+}
+
+.top20 {
+  margin-top: 20px;
+}
+
+.red {
+  background: #ff0000;
+}
+
+.fill-height {
+  min-height: 100%;
+  height: 100%;
+}
+
+.sidebar-footer {
+  padding: 6px;
+  background:#1a2226;
+  position:absolute;
+  bottom:0;
+  width: 100%;
+}
+
+.sidebar-footer label{
+  color: #4b646f;
+  font-family:'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  font-size:12px;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@-ms-keyframes rotate {
+    from {
+        -ms-transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+    }
+}
+
+.rotate
+{
+    -webkit-animation-name: rotate;
+    -ms-animation-name: rotate;
+    -webkit-animation-duration: 0.5s;
+    -ms-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -ms-animation-timing-function: linear;
+}
+
+.timeline-pedido
+{
+    width: 900px;
+    margin: 0 auto;
+}
+
+.dataTable tbody td .btn {
+    margin-bottom: 3px;
+}

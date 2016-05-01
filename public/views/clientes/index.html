@@ -1,0 +1,38 @@
+<!--<div ng-if="isLoaded">-->
+<div>
+    <div class="row">
+        <div class="col-xs-12" ng-if="showForm">
+            <form class="form-horizontal" name="form" ng-submit="submit(form)" novalidate="">
+                <fieldset ng-disabled="isLoading">
+                    <div class="form-group" show-errors>
+                        <div class="col-xs-7 col-sm-8 col-md-9 col-lg-10">
+                            <input type="text" name="nombre" id="nombre" class="form-control" ng-model="departamento.nombre" placeholder="Nombre del departamento" required>
+                        </div>
+                        <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
+                            <button class="btn btn-primary" type="submit" ng-if="isCreated">Crear</button>
+                            <button class="btn btn-primary" type="submit" ng-if="isEdited">Editar</button>
+                            <button class="btn btn-danger" ng-click="cancel()">Cancelar</button>
+                        </div>
+                        <div class="col-xs-12">
+                            <p class="help-block" ng-if="form.nombre.$error.required">El nombre es obligatorio</p>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-danger">
+                <div class="box-body">
+                    <table id="datatable" datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-striped table-bordered dt-responsive">
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
