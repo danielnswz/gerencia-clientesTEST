@@ -16,8 +16,13 @@ clientGest.config(function ($routeProvider) {
     
   })
   .when('/crear-clientes',{
-    templateUrl: 'views/index.html',
-      controller: 'ClienteController',
+    templateUrl: 'views/clientes/form.html',
+      controller: 'ClienteFormController',
+      label: 'Crear Clientes'
+  })
+  .when('/editar-cliente/:idCliente',{
+    templateUrl: 'views/clientes/form.html',
+      controller: 'ClienteFormController',
       label: 'Crear Clientes'
   })
   .when('/lista-clientes',{
@@ -46,7 +51,8 @@ clientGest.controller('LayoutController', function (
   $scope.breadcrumbs = breadcrumbs;
   $scope.titulo = ' ';
   $scope.subtitulo = ' ';
-  $scope.usuario = null;
+  $scope.usuario = "admin";
+  //$scope.usuario.nivel.descripcion = "Administrador";
   $scope.nivel = $('#nivel').val();
 
   var $uploadMenu = function () {

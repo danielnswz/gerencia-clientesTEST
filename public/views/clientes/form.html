@@ -10,41 +10,40 @@
 </div>
 <div class="row" ng-if="isLoaded||isCreated">
     <div class="col-lg-12">
-        <div class="box box-danger">
+        <div class="box box-primary">
             <!-- form start -->
             <form role="form" name="form">
                 <div class="box-body">
 
                     <div class="form-group" show-errors>
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" ng-model="departamento.nombre"
+                        <input type="text" class="form-control" id="nombre" name="nombre" ng-model="cliente.nombre"
                                placeholder="Nombre" required pattern="[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_\s\[\]\{\}\+\-\.\:\,\;\(\)\/\\\&\*\!\¿\?\¡\=\<\>\'\~\^]{0,45}"/>
-                        <p class="help-block" ng-if="form.nombre.$error.required">Este campo es obligatorio</p>
                     </div>
 
                     <div class="form-group" show-errors>
-                        <label for="ubicacion_sucursal">Ubicación dentro de la sucursal</label>
-                        <input type="text" class="form-control" id="ubicacion_sucursal" name="ubicacion_sucursal"
-                               ng-model="departamento.ubicacion_sucursal" required placeholder="Ubicación dentro de la sucursal"/>
+                        <label for="apellido">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" ng-model="cliente.apellido"
+                               placeholder="Apellido" required pattern="[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_\s\[\]\{\}\+\-\.\:\,\;\(\)\/\\\&\*\!\¿\?\¡\=\<\>\'\~\^]{0,45}"/>
                     </div>
 
                     <div class="form-group" show-errors>
-                        <label for="codigo">Código</label>
-                        <input type="text" class="form-control" id="codigo" name="codigo" ng-model="departamento.codigo"
-                               placeholder="Código" required pattern="[\w-]{0,45}"/>
+                        <label for="correo">Correo</label>
+                        <input type="email" class="form-control" id="correo" name="correo" ng-model="cliente.correo"
+                               placeholder="mail@mail.com" />
                     </div>
 
                     <div class="form-group" show-errors>
-                        <label for="encargado">Encargado</label>
-                        <input type="text" class="form-control" id="encargado" name="encargado" ng-model="departamento.encargado"
-                               placeholder="Encargado" required pattern=".{0,45}"/>
+                        <label for="edad">Fecha de Nacimiento</label>
+                        <input ng-init='initializingDatePicker()' type="text" class="form-control" id="edad" name="edad" ng-model="cliente.edad"
+                               placeholder="Fecha de Nacimiento" required/>
                     </div>
 
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="submit" ng-click="submit(form)" ng-if="isCreated" class="btn btn-primary">Registrar departamento</button>
-                    <button type="submit" ng-click="submit(form)" ng-if="!isCreated" class="btn btn-primary">Guardar cambios</button>
+                    <button type="submit" ng-click="submit(form)" ng-if="isCreated" class="btn btn-primary">Registrar Cliente</button>
+                    <button type="submit" ng-click="submit(form)" ng-if="!isCreated" class="btn btn-primary">Guardar Cambios</button>
                 </div>
             </form>
         </div>

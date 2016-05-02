@@ -11,11 +11,11 @@ clientGest.factory('Cliente', function ($http, $q) {
          * @param id_empresa ID de la empresa
          * @return $promise
          */
-        get: function (id_departamento, id_sucursal, id_empresa, callback) {
+        get: function (id_cliente, callback) {
             var cb = callback || angular.noop;
             var defer = $q.defer();
 
-            $http.get('api/empresa/'+id_empresa+'/sucursal/'+id_sucursal+'/departamento/'+id_departamento)
+            $http.get('api/cliente/'+id_cliente)
                 .success(function (data) {
                     defer.resolve(data);
                     return cb(data);
@@ -33,12 +33,12 @@ clientGest.factory('Cliente', function ($http, $q) {
          * @param departamento Modelo con los atributos de la departamento y la sucursal
          * @return $promise
          */
-        create: function (departamento, callback) {
+        create: function (cliente, callback) {
 
             var cb = callback || angular.noop;
             var defer = $q.defer();
 
-            $http.post('api/empresa/'+departamento.id_empresa+'/sucursal/'+departamento.id_sucursal+'/departamento', departamento)
+            $http.post('api/cliente/', cliente)
                 .success(function (data) {
                     defer.resolve(data);
                     return cb(data);
@@ -57,12 +57,13 @@ clientGest.factory('Cliente', function ($http, $q) {
          * @param departamento Modelo con los atributos de la departamento y la sucursal
          * @return $promise
          */
-        edit: function (departamento, callback) {
+        edit: function (cliente, callback) {
             var cb = callback || angular.noop;
             var defer = $q.defer();
-            console.log(departamento);
-            $http.put('api/empresa/'+departamento.id_empresa+'/sucursal/'+departamento.id_sucursal+'/departamento/'
-            +departamento.id_departamento, departamento)
+            console.log('casi backend');
+            console.log(cliente);
+            return;
+            $http.put('api/cliente/'+cliente.id, cliente)
                 .success(function (data) {
                     defer.resolve(data);
                     return cb(data);
@@ -96,27 +97,6 @@ clientGest.factory('Cliente', function ($http, $q) {
                 });
 
             return defer.promise;
-        },
-        
-        /** 
-         *
-         */
-        getBySucursal: function(idEmpresa, idSucursal, callback) {
-            var cb = callback || angular.noop;
-            var defer = $q.defer();
-
-            $http.get('api/empresa/'+idEmpresa+'/sucursal/'+idSucursal+'/departamento')
-                .success(function (data) {
-                    defer.resolve(data);
-                    return cb(data);
-                })
-                .error(function (err) {
-                    defer.reject(err);
-                    return cb(err);
-                });
-
-            return defer.promise;
         }
-
     };
 });

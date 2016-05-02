@@ -33,6 +33,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        return \Response::json(array('message' => $request));
         try{
             $cliente = new Cliente;
 
@@ -43,6 +44,8 @@ class ClienteController extends Controller
             $cliente->edad = $request->nacimiento;
 
             $cliente->save();
+
+            return \Response::json(array('success' => 'true'));
 
         }catch (\Exception $ex) {
             $response = array('error' => $ex->getMessage());
@@ -71,16 +74,24 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $cliente = Cliente::find($id);
 
-        $cliente->nombre = $request->nombre;
-        $cliente->apellido = $request->apellido;
-        if(isset($request->correo))
-            $cliente->correo = $request->correo;
-        $cliente->edad = $request->nacimiento;
+        try{
+            $cliente = Cliente::find($id);
 
-        $cliente->save();
+            $cliente->nombre = $request->nombre;
+            $cliente->apellido = $request->apellido;
+            if(isset($request->correo))
+                $cliente->correo = $request->correo;
+            $cliente->edad = $request->nacimiento;
+
+            $cliente->save();
+
+            return \Response::json(array('success' => 'true'));
+
+        }catch (\Exception $ex) {
+            $response = array('error' => $ex->getMessage());
+            return \Response::json($response, 500);
+        }
 
     }
 

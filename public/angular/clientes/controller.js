@@ -20,6 +20,7 @@ clientGest.controller('ClienteController', function (
     // | VARIABLES
     // |
     $scope.data = {};
+    $scope.$parent.titulo = "Lista de Clientes";
     $scope.showForm = false;
     $scope.isLoaded = false;
     $scope.isCreated = false;
@@ -66,7 +67,7 @@ clientGest.controller('ClienteController', function (
             };
             
             return '<button class="btn btn-danger" ng-click=\'delete(' + JSON.stringify(result) + ')\'>' + '<i class="fa fa-trash-o"></i> Eliminar' + '</button>' +
-            '&nbsp;<button class="btn btn-warning" ng-click=\'edit(' + JSON.stringify(result) + ')\'>' + '   <i class="fa fa-edit"></i> Editar';
+            '&nbsp;<button class="btn btn-warning" ng-click=\'edit(' + data[0] + ')\'>' + '   <i class="fa fa-edit"></i> Editar';
 
         })
 
@@ -98,9 +99,8 @@ clientGest.controller('ClienteController', function (
     /**
      *
      */
-    $scope.edit = function (departamento) {
-        $location.path("gestion-empresas/" + departamento.id_empresa + "/sucursales/" + departamento.id_sucursal +
-        "/departamentos/" + departamento.id_departamento + "/editar");
+    $scope.edit = function (cliente) {
+        $location.path("editar-cliente/"+cliente);
     };
 
     /**
@@ -153,7 +153,7 @@ clientGest.controller('ClienteFormController', function (
     Cliente) {
 
     //$scope.departamento = SharedViewObjectService.getObject();
-    $scope.departamento = {};
+    $scope.cliente = {};
     $scope.isLoaded = false;
     $scope.isEdited = false;
     $scope.isCreated = false;
@@ -164,18 +164,18 @@ clientGest.controller('ClienteFormController', function (
     $scope.showAlerta = false;
     $scope.errores = null;
 
-    $scope.departamento.id_sucursal = $routeParams.idSucursal;
-    $scope.departamento.id_empresa = $routeParams.idEmpresa;
-
-    if($routeParams.idEmpresa && $routeParams.idSucursal && $routeParams.idDepartamento){
+    $scope.cliente.id_cliente = $routeParams.idCliente;
+    //$scope.departamento.id_empresa = $routeParams.idEmpresa;
+    console.log('Cliente: '+$scope.cliente.id_cliente);
+    if($routeParams.idCliente){
         $scope.$parent.titulo = 'Editar departamento';
-        $scope.departamento.id_empresa = $routeParams.idDepartamento;
+        //$scope.departamento.id_empresa = $routeParams.idDepartamento;
         $scope.isEdited = true;
         NProgress.start();
-        Departamento.get($routeParams.idDepartamento, $routeParams.idSucursal, $routeParams.idEmpresa)
+        Cliente.get($routeParams.idCliente)
             .then(
             function (data) {
-                $scope.departamento = data;
+                $scope.cliente = data;
                 $scope.isLoaded = true;
                 NProgress.done();
             },
@@ -187,28 +187,33 @@ clientGest.controller('ClienteFormController', function (
         );
     }
     else {
-        $scope.$parent.titulo = 'Nuevo departamento';
+        $scope.$parent.titulo = 'Nuevo Cliente';
         $scope.isCreated = true;
     }
-
+    $scope.initializingDatePicker = function(){
+        $("#edad").datepicker({
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        }); 
+    };
 
     /**
      *
      */
     $scope.submit = function (form) {
 
-        console.log(form);
+        console.log($scope.cliente);
         // validar formulario
         if (form.$valid) {
-            console.log($scope.departamento);
+            //console.log($scope.cliente);
             if($scope.isCreated) {
                 NProgress.start();
-                Departamento.create($scope.departamento)
+                Cliente.create($scope.cliente)
                     .then(
                     function (data) {
                         if (data.success == "true") {
                             swal("Atención", "Departamento creado exitosamente", "success");
-                            $location.path("gestion-empresas/" + $scope.departamento.id_empresa + "/sucursales/" + $scope.departamento.id_sucursal + "/departamentos/");
+                            $location.path("lista-clientes/");
                         } else {
                             if (data.errors == "codigo") {
                                 swal("Atención", "Este codigo se encuentra ya registrado", "error");
@@ -225,25 +230,27 @@ clientGest.controller('ClienteFormController', function (
                     }
                 );
             }
-            else if($scope.isEdited){
-                NProgress.start();
-                Departamento.edit($scope.departamento)
-                    .then(
-                    function (data) {
-                        if (data.success == "true") {
-                            swal("Atención", "Departamento modificado exitosamente", "success");
-                            $location.path("gestion-empresas/" + $scope.departamento.id_empresa + "/sucursales/" + $scope.departamento.id_sucursal + "/departamentos/");
-                        } else {
+            else{
+                if($scope.isEdited){
+                    NProgress.start();
+                    Cliente.edit($scope.cliente)
+                        .then(
+                        function (data) {
+                            if (data.success == "true") {
+                                swal("Atención", "Cliente modificado exitosamente", "success");
+                                $location.path("lista-clientes/");
+                            } else {
+                                swal("Atención", "Ha ocurrido un error", "error");
+                            }
+                            NProgress.done();
+                        },
+                        function (err) {
+                            console.log(err);
                             swal("Atención", "Ha ocurrido un error", "error");
+                            NProgress.done();
                         }
-                        NProgress.done();
-                    },
-                    function (err) {
-                        console.log(err);
-                        swal("Atención", "Ha ocurrido un error", "error");
-                        NProgress.done();
-                    }
-                );
+                    );
+                }
             }
         }
     };
