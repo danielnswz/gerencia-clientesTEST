@@ -25,6 +25,9 @@ DB_PORT=5432
 DB_DATABASE=gerencia-cliente
 DB_USERNAME=postgres
 DB_PASSWORD=123
+```
+--Migrar estructuras a BDD y levantar Servidor
+```bash
 php artisan migrate
 php artisan serve
 ```
