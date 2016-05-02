@@ -7,33 +7,19 @@
 
 ## Installation ##
 - clone repository
+- CREAR BDD
 
-```bash
-cd PATH_TO_PROJECT_IN_SERVER
-composer install
-**1**
-php artisan migrate
-php artisan serve
-```
-**1**: Crear BDD && editar file .env con conexión a BDD:
-```bash
 CREATE DATABASE "gerencia-clientes"
   WITH ENCODING='UTF8'
        CONNECTION LIMIT=-1;
 
-
-DB_CONNECTION=mysql
->>>DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
-DB_PORT=3306
->>>DB_PORT=5432
-DB_DATABASE=homestead
->>>DB_DATABASE=gerencia-clientes
-DB_USERNAME=homestead
->>>DB_USERNAME=postgres
-DB_PASSWORD=secret
->>>DB_PASSWORD=123
+```bash
+cd PATH_TO_PROJECT_IN_SERVER
+composer install
+php artisan migrate
+php artisan serve
 ```
+
 
 ## Technology Stack ##
 - **Laravel** 5.2
