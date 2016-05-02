@@ -16,6 +16,15 @@ CREATE DATABASE "gerencia-clientes"
 ```bash
 cd PATH_TO_PROJECT_IN_SERVER
 composer install
+```
+--Configurar archivo .env: 
+```bash
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=gerencia-cliente
+DB_USERNAME=postgres
+DB_PASSWORD=123
 php artisan migrate
 php artisan serve
 ```
