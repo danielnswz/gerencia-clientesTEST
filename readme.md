@@ -15,8 +15,13 @@ composer install
 php artisan migrate
 php artisan serve
 ```
-**1: editar file .env con conexión a BDD:
+**1**: Crear BDD && editar file .env con conexión a BDD:
 ```bash
+CREATE DATABASE "gerencia-clientes"
+  WITH ENCODING='UTF8'
+       CONNECTION LIMIT=-1;
+
+
 DB_CONNECTION=mysql
 >>>DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
