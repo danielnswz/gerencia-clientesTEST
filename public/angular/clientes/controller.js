@@ -152,24 +152,23 @@ clientGest.controller('ClienteFormController', function (
     SharedViewObjectService,
     Cliente) {
 
-    //$scope.departamento = SharedViewObjectService.getObject();
     $scope.cliente = {};
     $scope.isLoaded = false;
     $scope.isEdited = false;
     $scope.isCreated = false;
-
-    console.log($scope.departamento);
 
     $scope.$parent.subtitulo = '';
     $scope.showAlerta = false;
     $scope.errores = null;
 
     $scope.cliente.id_cliente = $routeParams.idCliente;
-    //$scope.departamento.id_empresa = $routeParams.idEmpresa;
-    console.log('Cliente: '+$scope.cliente.id_cliente);
+    /**
+     * Verifica si es edición o creación
+     * si es edicion, busca los datos del cliente existente
+     * renderiza con 2-w-d-b
+     */
     if($routeParams.idCliente){
         $scope.$parent.titulo = 'Editar departamento';
-        //$scope.departamento.id_empresa = $routeParams.idDepartamento;
         $scope.isEdited = true;
         NProgress.start();
         Cliente.get($routeParams.idCliente)
@@ -190,6 +189,9 @@ clientGest.controller('ClienteFormController', function (
         $scope.$parent.titulo = 'Nuevo Cliente';
         $scope.isCreated = true;
     }
+    /**
+     * Inicializa el DatePicker del formulario
+     */
     $scope.initializingDatePicker = function(){
         $("#edad").datepicker({
             autoclose: true,
@@ -198,15 +200,14 @@ clientGest.controller('ClienteFormController', function (
     };
 
     /**
-     *
+     * Envio de formulario (Creación || Edición de Clientes)
      */
     $scope.submit = function (form) {
-
-        console.log($scope.cliente);
         // validar formulario
         if (form.$valid) {
-            //console.log($scope.cliente);
+            //valida si es creación o edición
             if($scope.isCreated) {
+                //es creación
                 NProgress.start();
                 Cliente.create($scope.cliente)
                     .then(
@@ -215,11 +216,11 @@ clientGest.controller('ClienteFormController', function (
                             swal("Atención", "Cliente creado exitosamente", "success");
                             $location.path("lista-clientes/");
                         } else {
-                            if (data.errors == "codigo") {
+                            if (data.errors == "correo") {
                                 swal("Atención", "Este cliente se encuentra ya registrado", "error");
                             }
                             else
-                                swal("Atención", "Ha ocurrido un error", "error");
+                                swal("Atención", "Ha ocurrido un error "+data.errors, "error");
                         }
                         NProgress.done();
                     },
@@ -232,6 +233,7 @@ clientGest.controller('ClienteFormController', function (
             }
             else{
                 if($scope.isEdited){
+                    //es edición
                     NProgress.start();
                     Cliente.edit($scope.cliente)
                         .then(

@@ -4,11 +4,9 @@ clientGest.factory('Cliente', function ($http, $q) {
 
     return {
         /**
-         * Obtiene el departamento
+         * Obtiene el cliente
          *
-         * @param id_departamento ID del departamento
-         * @param id_sucursal ID de la sucursal
-         * @param id_empresa ID de la empresa
+         * @param id_cliente ID del cliente
          * @return $promise
          */
         get: function (id_cliente, callback) {
@@ -28,9 +26,9 @@ clientGest.factory('Cliente', function ($http, $q) {
             return defer.promise;
         },
         /**
-         * Crea una nuevo Departamento
+         * Crea una nuevo cliente
          *
-         * @param departamento Modelo con los atributos de la departamento y la sucursal
+         * @param cliente Modelo con los atributos del cliente
          * @return $promise
          */
         create: function (cliente, callback) {

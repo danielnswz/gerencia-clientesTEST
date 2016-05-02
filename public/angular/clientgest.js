@@ -1,7 +1,7 @@
 var clientGest = angular.module("clientgest", ['ngRoute', 'datatables', 'datatables.bootstrap', 'ng-breadcrumbs', 'ui.bootstrap.showErrors', 'oitozero.ngSweetAlert', 'angularFileUpload']);
 
 
-// configure our routes
+//Configuración de rutas
 clientGest.config(function ($routeProvider) {
   $routeProvider
     .otherwise({
@@ -50,15 +50,9 @@ clientGest.controller('LayoutController', function (
 
   $scope.breadcrumbs = breadcrumbs;
   $scope.titulo = ' ';
-  $scope.subtitulo = ' ';
-  $scope.usuario = "admin";
-  //$scope.usuario.nivel.descripcion = "Administrador";
-  $scope.nivel = $('#nivel').val();
 
   var $uploadMenu = function () {
-    
-
-      // Menu del usuario ingresador
+      // Menu
       $scope.menuItems = [{
         nombre: "Creación de Clientes",
         link: "#/crear-clientes",
@@ -71,14 +65,11 @@ clientGest.controller('LayoutController', function (
       }];
 
     }
-
     $uploadMenu();
-
-
 });
 
 clientGest.controller('IndexController', function ($scope, breadcrumbs, $http) {
-
+  $scope.$parent.titulo = "Home";
 
 });
 

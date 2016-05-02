@@ -13,7 +13,8 @@ use App\Cliente;
 class ClienteController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of "clientes".
+     * Muestra una lista de "clientes".
      *
      * @return \Illuminate\Http\Response
      */
@@ -29,14 +30,14 @@ class ClienteController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created "cliente" in storage.
+     * Almacena un "cliente" recien creado en la BD.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //return \Response::json($request);
         try{
             $cliente = new Cliente;
 
@@ -57,7 +58,8 @@ class ClienteController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified "cliente".
+     * Muestra el "cliente" especificado.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -69,7 +71,8 @@ class ClienteController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified "cliente" in storage.
+     * Actualiza el "cliente" especificado en BD.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -99,17 +102,16 @@ class ClienteController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified "cliente" from storage.
+     * Elimina el "cliente" especificado de BD.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
         try{
             $cliente = Cliente::find($id);
-
             $cliente->delete();
 
             return \Response::json(array('success' => 'true'));
@@ -117,9 +119,15 @@ class ClienteController extends Controller
             $response = array('error' => $ex->getMessage());
             return \Response::json($response, 500);
         }
-        
     }
 
+    /**
+     * Calculates age from the specified date to real date.
+     * Calcula la edad desde una fecha especificada hasta la fecha actual.
+     *
+     * @param  string  $fecha
+     * @return int
+     */
     public function CalcularEdad( $fecha ) {
         list($Y,$m,$d) = explode("-",$fecha);
         return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
