@@ -52,17 +52,14 @@ clientGest.factory('Cliente', function ($http, $q) {
         },
 
         /**
-         * Edita una departamento
+         * Edita un cliente
          *
-         * @param departamento Modelo con los atributos de la departamento y la sucursal
+         * @param cliente Modelo con los atributos del cliente
          * @return $promise
          */
         edit: function (cliente, callback) {
             var cb = callback || angular.noop;
             var defer = $q.defer();
-            console.log('casi backend');
-            console.log(cliente);
-            return;
             $http.put('api/cliente/'+cliente.id, cliente)
                 .success(function (data) {
                     defer.resolve(data);
@@ -70,7 +67,7 @@ clientGest.factory('Cliente', function ($http, $q) {
                 })
                 .error(function (errr) {
                     defer.reject(errr);
-                    return cb(err);
+                    return cb(errr);
                 });
 
             return defer.promise;

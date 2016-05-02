@@ -21,6 +21,9 @@ class ClienteController extends Controller
     {
         //Returns a Cliente's list
         $result= Cliente::all();
+        foreach ($result as $cliente) {
+            $cliente->edad = $this->CalcularEdad($cliente->edad);
+        }
         return Datatables::of($result)
                 ->make();
     }
@@ -33,7 +36,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        return \Response::json(array('message' => $request));
+        //return \Response::json($request);
         try{
             $cliente = new Cliente;
 
@@ -41,7 +44,7 @@ class ClienteController extends Controller
             $cliente->apellido = $request->apellido;
             if(isset($request->correo))
                 $cliente->correo = $request->correo;
-            $cliente->edad = $request->nacimiento;
+            $cliente->edad = $request->edad;
 
             $cliente->save();
 
@@ -82,7 +85,7 @@ class ClienteController extends Controller
             $cliente->apellido = $request->apellido;
             if(isset($request->correo))
                 $cliente->correo = $request->correo;
-            $cliente->edad = $request->nacimiento;
+            $cliente->edad = $request->edad;
 
             $cliente->save();
 
@@ -115,5 +118,10 @@ class ClienteController extends Controller
             return \Response::json($response, 500);
         }
         
+    }
+
+    public function CalcularEdad( $fecha ) {
+        list($Y,$m,$d) = explode("-",$fecha);
+        return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
     }
 }

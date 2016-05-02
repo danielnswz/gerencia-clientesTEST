@@ -212,11 +212,11 @@ clientGest.controller('ClienteFormController', function (
                     .then(
                     function (data) {
                         if (data.success == "true") {
-                            swal("Atención", "Departamento creado exitosamente", "success");
+                            swal("Atención", "Cliente creado exitosamente", "success");
                             $location.path("lista-clientes/");
                         } else {
                             if (data.errors == "codigo") {
-                                swal("Atención", "Este codigo se encuentra ya registrado", "error");
+                                swal("Atención", "Este cliente se encuentra ya registrado", "error");
                             }
                             else
                                 swal("Atención", "Ha ocurrido un error", "error");
