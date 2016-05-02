@@ -16,6 +16,7 @@ php artisan migrate
 php artisan serve
 ```
 **1: editar file .env con conexión a BDD:
+```bash
 DB_CONNECTION=mysql
 >>>DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
@@ -27,7 +28,7 @@ DB_USERNAME=homestead
 >>>DB_USERNAME=postgres
 DB_PASSWORD=secret
 >>>DB_PASSWORD=123
-
+```
 
 ## Technology Stack ##
 - **Laravel** 5.2
