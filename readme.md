@@ -1,3 +1,29 @@
+# Installation guide #
+
+## Dependencies ##
+- **PostgreSQL**: 9.4
+- **PHP**: >=5.5.9
+- **Composer**: >=1.0-dev
+
+## Installation ##
+- clone repository
+
+```bash
+cd PATH_TO_PROJECT_IN_SERVER
+composer install
+**1**
+php artisan migrate
+php artisan serve
+```
+
+
+## Technology Stack ##
+- **Laravel** 5.2
+- **PostgreSQL**
+- **AngularJs**
+- **Bootstrap**
+- **jQuery**
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
